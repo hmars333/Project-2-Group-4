@@ -179,5 +179,10 @@ function optionChanged(newSample) {
   buildMetadata(newSample);
 }
 
+function updatePortfolio() {
+    alert("Updated!!!")
+}
+
+console.log("Investment Portfolio Dashboard")
 // Initialize the dashboard
 //init();
