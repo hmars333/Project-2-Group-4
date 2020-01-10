@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>App</title>
+    <style src="/static/main.css?v=46"></style>
+  </head>
+  <body>
+    <h1>{{message}}</h1>
+    <table border="0" style="border-spacing:5px">
+      <tr>
+        <td><h3 style="display:inline-block; padding:0; margin:0">Current Portfolio</h3></td>
+        <td><input id="currentPortfolio" type="text" value="10000"/></td>
+      </tr>
+      <tr>
+        <td><h3 style="display:inline-block; padding:0; margin:0">Additional Investment</h3></td>
+        <td><input id="additionalInvestment" type="text" value="15000"/></td>
+      </tr>
+      <tr>
+        <td><h3 style="display:inline-block; padding:0; margin:0">Number of years</h3></td>
+        <td><input id="noOfYrs" type="text" value="30"/></td>
+      </tr>
+    </table>
+     
+    
+
+    <br/>
+    <input type="button" value="Update" onclick="updateClick()" style="box-sizing: content-box; -webkit-box-sizing: content-box; padding:15px; font-size:20px; font-weight:bold;"/>
+    <br/>
+    <br/>
+    <br/>
+    <div class = "graph" id="wordCountContainer"></div>
+    <svg id="svg" width="960" height="500"></svg>
+
+    <div id="container" class="svg-container"></div>
+
+    <table border="0" style="border-spacing:5px"></table>
+      <tr>
+        <td><h3 style="display:inline-block; padding:0; margin:0">Portfolio Type</h3></td>
+        <td><select id="PortfolioType" type="dropdown" >
+          <option value = "1">Very Conservative</option>
+          <option value = "2">Conservative</option>
+          <option value = "3">Moderate</option>
+          <option value = "4">Aggressive</option>
+          <option value = "5">Very Aggressive</option>
+         </select>
+        </td>
+      </tr>
+    </table>
+
+    <br/>
+    <input type="button" value="Run" onclick=runClick()" style="box-sizing: content-box; -webkit-box-sizing: content-box; padding:15px; font-size:20px; font-weight:bold;"/>
+    <br/>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="/static/site.js?v=52"></script>
+  </body>
+</html>
