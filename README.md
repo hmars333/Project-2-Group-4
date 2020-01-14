@@ -13,4 +13,4 @@
 * Probability of success dependent on dollar invested and portfolio type
 
 ### Method
-![WorkProcess](WorkProcess.png)
+![WorkProcess](/Images/WorkProcess.png)
