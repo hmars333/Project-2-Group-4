@@ -16,10 +16,19 @@
   <!-- Custom styles for this template-->
   <link href="{{ url_for('static', filename='css/sb-admin.css') }}" rel="stylesheet">
 
+    <style>
+        input:invalid {
+            border: thin solid red;
+        }
+        input:valid {
+            border: thin solid green;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
-  <form method="POST" action="/">
+  <form name="investment-db" method="POST" action="/" class="form-horizontal">
 
     <div id="wrapper">
 
@@ -39,7 +48,7 @@
           </ol>
 
           <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <div class="card mb-3">
                 <div class="card-header" style="color: #ffffff;background-color: #337ab7;">
                   <i class="fas fa-bars"></i>
@@ -51,25 +60,25 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><b>Current Portfolio Value &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
                     </div>
-                    <input type="text" id="presentValue" id="presentValue" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" id="presentValue" value="0" required pattern= "\d+(\.\d{1,2})?" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                   </div>
                   <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><b>Annual Contribution Value &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
                     </div>
-                    <input type="text" id="investmentValue" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" id="investmentValue" value="1" required pattern= "\d+(\.\d{1,2})?" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                   </div>
                   <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><b>Years of Investment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
                     </div>
-                    <input type="text" id="horizon" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" id="horizon" value="1" required pattern= "\b([1-9]|[0-9][0-9])\b" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                   </div>
                   <button type="button" class="btn btn-secondary btn-lg btn-block" style="color: #ffffff;background-color: #337ab7;" onclick="updatePortfolio()">Update</button>
                 </div>
               </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-9">
               <div class="card mb-3">
                 <div class="card-header" style="color: #ffffff;background-color: #337ab7;">
                   <i class="fas fa-chart-area"></i>&nbsp;<b>Ending Portfolio Balance</b>
@@ -85,12 +94,14 @@
             <div class="col-lg-8">
               <div class="card mb-3">
                 <div class="card-header" style="color: #ffffff;background-color: #337ab7;">
-                  <i class="fas fa-chart-area"></i><b>&nbsp;<span id="ChartBLabel"></span> Monte Carlo Simulation</b>
+                  <i class="fas fa-chart-area"></i><b>&nbsp;<span id="ChartBLabel"></span>
+                    Profile
+                    </b>
                 </div>
                 <div class="card-body">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><b>Select Portfolio Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
+                            <span class="input-group-text"><b>Select Portfolio Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
                         </div>
                         <select id="portfolio" class="browser-default custom-select" onchange="optionChanged()">
                             <option value="Very_Conservative" text="Very Conservative" selected>Very Conservative</option>
@@ -117,7 +128,7 @@
           </div>
 
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="card mb-3">
                     <div class="card-header" style="color: #ffffff;background-color: #337ab7;">
                       <i class="fas fa-bars"></i>
@@ -126,15 +137,15 @@
                     <div id="sample-metadata" class="card-body">
                       <div class="input-group input-group-sm mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text"><b>Desired Ending Value</b></span>
+                            <span class="input-group-text"><b>Desired Ending Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
                         </div>
-                        <input type="text" id="probOfSuccess" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input type="text" id="probOfSuccess" value="0" required pattern= "\d+(\.\d{1,2})?" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                       </div>
                       <button type="button" class="btn btn-secondary btn-lg btn-block" style="color: #ffffff;background-color: #337ab7;" onclick="endingAmount()">Calculate</button>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                   <div class="card mb-3">
                     <div class="card-header" style="color: #ffffff;background-color: #337ab7;">
                       <i class="fas fa-chart-area"></i>&nbsp;<b>Probability of Success (Depends on Investment & Portfolio Type)</b>
@@ -172,11 +183,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 
-    <script src="{{ url_for('static', filename='./js/validation.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='./static/js/validation.js') }}"></script>#}
     <!-- Main script file to load charts with sample data -->
     <script src="{{ url_for('static', filename='./static/js/app.js') }}"></script>
-
 
   </form>
 </body>

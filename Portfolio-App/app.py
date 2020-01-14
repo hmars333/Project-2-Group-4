@@ -123,7 +123,7 @@ def histogram():
     portfolio = request.args.get('pf')
 
     simH = pd.DataFrame()
-    iterations = 100
+    iterations = 1000
     for x in range(iterations):
 
         expected_return = dataSummary.iloc[0][portfolio]  # .0867 #Value based on selection
@@ -156,7 +156,7 @@ def probOfSuccess():
     endAmount = request.args.get('ps')
 
     simP = pd.DataFrame()
-    iterations = 100
+    iterations = 1000
     for x in range(iterations):
 
         expected_return = dataSummary.iloc[0][portfolio]  # .0867 #Value based on selection
@@ -177,6 +177,7 @@ def probOfSuccess():
 
     ending_values = simP.loc[time_horizon - 1]
     prob_of_success = (len(ending_values[ending_values > float(endAmount)]) / len(ending_values)) * 100
+    prob_of_success = "{0:.2f}".format(prob_of_success)
     pString = f"Your probability of success is {prob_of_success}%"
     pString = json.dumps(pString)
     return pString

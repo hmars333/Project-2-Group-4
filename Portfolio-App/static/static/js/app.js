@@ -1,5 +1,5 @@
 var ChartBLabel = d3.select("#ChartBLabel");
-ChartBLabel.html("No");
+ChartBLabel.html("- ");
 
 function optionChanged() {
   updateEachPortfolio();
