@@ -4,7 +4,7 @@ function validate(){
   var horizon= document.getElementById('horizon').value;
   var pvRegex = [1-9][0-9]{2,};
   var ivRegex = [1-9][0-9]{2,};
-  var timeRegex= \b([1-9]|[0-4][0-5])\b;
+  var timeRegex= [1-4][1-5];
   var pvResult = pvRegex.test(presentValue);
   var ivResult = ivRegex.test(investmentValue);
   var horResult= timeRegex.test(horizon);
